@@ -1,4 +1,4 @@
-# 取预计总距离最小的在前端
+# 取剩余最小的在前端
 # 加上已经过距离限制
 
 from Joint import *
@@ -120,14 +120,14 @@ def BAB(joint, start_point, end_point):
 				for point in current_path:
 					new_path.append(point)
 				new_path.append(next_point)
-				for i in range(len(new_path) - 1):
-					vector1 = np.array(new_path[i])
-					vector2 = np.array(new_path[i+1])
-					distance = int(np.sqrt(np.sum(np.square(vector1-vector2))))
-					new_distance += distance
+				# for i in range(len(new_path) - 1):
+				# 	vector1 = np.array(new_path[i])
+				# 	vector2 = np.array(new_path[i+1])
+				# 	distance = int(np.sqrt(np.sum(np.square(vector1-vector2))))
+				# 	new_distance += distance
 				vector3 = np.array(next_point)
 				vector4 = np.array(end_point)
-				new_distance = new_distance + int(np.sqrt(np.sum(np.square(vector3-vector4))))
+				new_distance = int(np.sqrt(np.sum(np.square(vector3-vector4))))
 				if next_point == end_point:
 					break_flag = 1
 					# shortest_path.append(new_path)
@@ -197,6 +197,11 @@ def BAB(joint, start_point, end_point):
 	for i in range(len(new_path)-1):
 		ax.plot([new_path[i][0], new_path[i+1][0]], [new_path[i][1], new_path[i+1][1]], linewidth = 4, color = "green")
 	plt.pause(0.1)
+	for i in range(len(new_path) - 1):
+		vector1 = np.array(new_path[i])
+		vector2 = np.array(new_path[i+1])
+		distance = int(np.sqrt(np.sum(np.square(vector1-vector2))))
+		new_distance += distance
 	ax.text(x = end_point[0], y = end_point[1], s = str(new_distance), color = "red")
 	plt.show()
 
